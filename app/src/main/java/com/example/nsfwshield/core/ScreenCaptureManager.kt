@@ -3,6 +3,7 @@ package com.example.nsfwshield.core
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.PixelFormat
 import android.graphics.Matrix
 import android.graphics.Rect
 import android.hardware.display.DisplayManager
@@ -65,13 +66,16 @@ class ScreenCaptureManager(
         }
         projection = proj
 
-        proj.callback = object : MediaProjection.Callback() {
+        captureThread = HandlerThread("shield-capture").also { it.start() }
+        captureHandler = Handler(captureThread!!.looper)
+
+        proj.registerCallback(object : MediaProjection.Callback() {
             override fun onStop() {
                 Log.w(TAG, "MediaProjection stopped by system.")
                 stopInternal()
                 onError("MediaProjection stopped.")
             }
-        }
+        }, captureHandler)
 
         val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val display = wm.defaultDisplay
@@ -84,9 +88,6 @@ class ScreenCaptureManager(
         val scale = CAPTURE_WIDTH.toFloat() / screenWidth.toFloat()
         val captureW = CAPTURE_WIDTH
         val captureH = (screenHeight * scale).toInt().coerceAtLeast(1)
-
-        captureThread = HandlerThread("shield-capture").also { it.start() }
-        captureHandler = Handler(captureThread!!.looper)
 
         imageReader = ImageReader.newInstance(captureW, captureH, PixelFormat.RGBA_8888, 2)
         imageReader!!.setOnImageAvailableListener({ reader -> onImage(reader) }, captureHandler)
@@ -178,3 +179,4 @@ class ScreenCaptureManager(
         captureThread = null
     }
 }
+
