@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name">Shield</string>
+
+    <!-- Main UI -->
+    <string name="protection_status_off">الحماية متوقفة</string>
+    <string name="protection_status_on">الحماية تعمل</string>
+    <string name="start_protection">بدء الحماية</string>
+    <string name="stop_protection">إيقاف الحماية</string>
+    <string name="target_apps">التطبيقات المستهدفة</string>
+    <string name="sensitivity">الحساسية</string>
+    <string name="pin_settings">إعدادات PIN</string>
+    <string name="diagnostics">التشخيصات</string>
+    <string name="strict_mode">وضع الحماية الصارم</string>
+
+    <!-- Sensitivity -->
+    <string name="sens_conservative">محافظ</string>
+    <string name="sens_balanced">متوازن</string>
+    <string name="sens_less">أقل حساسية</string>
+
+    <!-- Protection service -->
+    <string name="notification_channel_name">حماية الشاشة</string>
+    <string name="notification_channel_desc">إشعار indicates أن حماية الشاشة تعمل</string>
+    <string name="notification_title">Shield يعمل</string>
+    <string name="notification_text">حماية الشاشة فعالة</string>
+
+    <!-- Overlay -->
+    <string name="overlay_blocked_text">تم حجب محتوى غير مناسب</string>
+    <string name="overlay_blocked_sub">الرجوع آمن</string>
+
+    <!-- PIN -->
+    <string name="pin_enter">أدخل PIN</string>
+    <string name="pin_confirm">تأكيد PIN</string>
+    <string name="pin_new">PIN جديد</string>
+    <string name="pin_wrong">PIN غير صحيح</string>
+    <string name="pin_mismatch">الـPIN غير متطابق</string>
+    <string name="pin_set_success">تم تعيين PIN</string>
+    <string name="pin_not_set">لم يتم تعيين PIN بعد</string>
+
+    <!-- Permissions -->
+    <string name="perm_overlay_title">إذن العرض فوق التطبيقات</string>
+    <string name="perm_overlay_msg">يحتاج Shield إلى إذن العرض فوق التطبيقات لحجب المحتوى غير المناسب. يرجى منح الإذن.</string>
+    <string name="perm_overlay_denied">بدون إذن العرض فوق التطبيقات لا يمكن الحجب.</string>
+    <string name="perm_capture_denied">تم رفض إذن التقاط الشاشة. الحماية لا يمكن أن تبدأ.</string>
+    <string name="perm_usage_title">إذن الوصول للاستخدام</string>
+    <string name="perm_usage_msg">للكشف عن التطبيق الحالي في المقدمة، يحتاج Shield إلى إذن الوصول للاستخدام. افتح الإعدادات ومكّن الوصول لـ Shield.</string>
+    <string name="perm_usage_open">فتح إعدادات الوصول للاستخدام</string>
+
+    <!-- Boot -->
+    <string name="boot_notification_title">Shield — إعادة الموافقة مطلوبة</string>
+    <string name="boot_notification_text">بعد إعادة التشغيل، يجب الموافقة على التقاط الشاشة مرة أخرى. افتح Shield.</string>
+
+    <!-- Diagnostics -->
+    <string name="diag_frames">إطارات تم تحليلها</string>
+    <string name="diag_inference">زمن الاستنتاج</string>
+    <string name="diag_status">حالة الحماية</string>
+    <string name="diag_classifier">حالة المصنف</string>
+    <string name="diag_foreground">التطبيق الحالي</string>
+    <string name="diag_last_score">آخر نتيجة NSFW</string>
+
+    <!-- Errors -->
+    <string name="err_model_missing">ملف النموذج غير موجود في الأصول.</string>
+    <string name="err_model_load">فشل تحميل النموذج.</string>
+    <string name="err_tensor_shape">شكل الموتر غير متوقع.</string>
+    <string name="err_inference">خطأ أثناء الاستنتاج.</string>
+    <string name="err_imagereader">خطأ في قراءة الإطار.</string>
+    <string name="err_service_stopped">توقفت الخدمة.</string>
+    <string name="err_memory">ذاكرة غير كافية.</string>
+
+    <!-- Dialog buttons -->
+    <string name="ok">موافق</string>
+    <string name="cancel">إلغاء</string>
+    <string name="grant">منح</string>
+</resources>

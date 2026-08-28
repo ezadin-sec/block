@@ -1,0 +1,26 @@
+[
+    {
+        "merged": "com.example.nsfwshield.app-merged_res-33:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "com.example.nsfwshield.app-main-35:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.example.nsfwshield.app-merged_res-33:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "com.example.nsfwshield.app-main-35:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.nsfwshield.app-merged_res-33:/layout_overlay_blocked.xml.flat",
+        "source": "com.example.nsfwshield.app-main-35:/layout/overlay_blocked.xml"
+    },
+    {
+        "merged": "com.example.nsfwshield.app-merged_res-33:/layout_pin_input.xml.flat",
+        "source": "com.example.nsfwshield.app-main-35:/layout/pin_input.xml"
+    },
+    {
+        "merged": "com.example.nsfwshield.app-merged_res-33:/layout_activity_main.xml.flat",
+        "source": "com.example.nsfwshield.app-main-35:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.nsfwshield.app-merged_res-33:/drawable_ic_shield_foreground.xml.flat",
+        "source": "com.example.nsfwshield.app-main-35:/drawable/ic_shield_foreground.xml"
+    }
+]

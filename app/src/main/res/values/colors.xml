@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary (deep blue-teal protective feel) -->
+    <color name="primary_50">#E8F1F5</color>
+    <color name="primary_100">#C5DBE6</color>
+    <color name="primary_200">#9BC2D4</color>
+    <color name="primary_300">#6FA7BF</color>
+    <color name="primary_400">#4A8DA8</color>
+    <color name="primary_500">#2E6F8E</color>
+    <color name="primary_600">#225778</color>
+    <color name="primary_700">#1B4660</color>
+    <color name="primary_800">#14374D</color>
+    <color name="primary_900">#0C2333</color>
+
+    <!-- Secondary (warm amber for accents) -->
+    <color name="secondary_50">#FDF6EC</color>
+    <color name="secondary_100">#F8E4C2</color>
+    <color name="secondary_200">#F2CD8E</color>
+    <color name="secondary_300">#ECB45A</color>
+    <color name="secondary_400">#E69E33</color>
+    <color name="secondary_500">#D4841A</color>
+    <color name="secondary_600">#A86613</color>
+    <color name="secondary_700">#7C4B0E</color>
+    <color name="secondary_800">#503008</color>
+    <color name="secondary_900">#2A1804</color>
+
+    <!-- Success -->
+    <color name="success_500">#2E8B57</color>
+    <color name="success_700">#1F6B40</color>
+
+    <!-- Warning -->
+    <color name="warning_500">#E69E33</color>
+    <color name="warning_700">#A86613</color>
+
+    <!-- Error -->
+    <color name="error_500">#C0392B</color>
+    <color name="error_700">#8B2820</color>
+
+    <!-- Neutrals -->
+    <color name="neutral_50">#FAFAFA</color>
+    <color name="neutral_100">#F0F0F0</color>
+    <color name="neutral_200">#E0E0E0</color>
+    <color name="neutral_300">#BDBDBD</color>
+    <color name="neutral_400">#9E9E9E</color>
+    <color name="neutral_500">#757575</color>
+    <color name="neutral_600">#616161</color>
+    <color name="neutral_700">#424242</color>
+    <color name="neutral_800">#303030</color>
+    <color name="neutral_900">#1A1A1A</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <color name="overlay_bg">#E6000000</color>
+    <color name="overlay_text">#FFFFFF</color>
+    <color name="overlay_sub">#B0C5D9</color>
+</resources>
