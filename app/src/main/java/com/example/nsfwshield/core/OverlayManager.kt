@@ -1,67 +1,56 @@
 package com.example.nsfwshield.core
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.PixelFormat
 import android.os.Build
-import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
 import com.example.nsfwshield.R
 
-/**
- * Manages the full-screen overlay shown when NSFW content is detected.
- *
- * Uses TYPE_APPLICATION_OVERLAY (requires SYSTEM_ALERT_WINDOW). The overlay is
- * opaque so the underlying content is not visible through it. It is shown and
- * hidden on demand by the [ProtectionService].
- */
 class OverlayManager(private val context: Context) {
-
-    private val windowManager =
-        context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+    private val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
     private var overlayView: View? = null
+    private var isShowing = false
 
-    val canDrawOverlays: Boolean
-        get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            Settings.canDrawOverlays(context) else true
-
-    fun show() {
-        if (overlayView != null) return // already shown
-        if (!canDrawOverlays) return
-
+    fun showBlock() {
+        if (isShowing) return
+        
+        // 1. إظهار الشاشة السوداء الصارمة
         val params = WindowManager.LayoutParams(
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.MATCH_PARENT,
-            WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY,
-            WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or
-                WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or
-                WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED,
-            PixelFormat.OPAQUE
-        ).apply {
-            // Slight animation on appear.
-            windowAnimations = android.R.style.Animation_Dialog
-        }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+            else
+                WindowManager.LayoutParams.TYPE_PHONE,
+            WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or
+                    WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
+            PixelFormat.TRANSLUCENT
+        )
 
-        val view = LayoutInflater.from(context).inflate(R.layout.overlay_blocked, null)
-        try {
-            windowManager.addView(view, params)
-            overlayView = view
-        } catch (e: Exception) {
-            // If adding the view fails (e.g. permission revoked at runtime), clear.
-            overlayView = null
+        overlayView = LayoutInflater.from(context).inflate(R.layout.overlay_blocked, null)
+        windowManager.addView(overlayView, params)
+        isShowing = true
+
+        // 2. الطرد الفوري والإجباري إلى الشاشة الرئيسية للهاتف (Home Screen)
+        val homeIntent = Intent(Intent.ACTION_MAIN).apply {
+            addCategory(Intent.CATEGORY_HOME)
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
         }
+        context.startActivity(homeIntent)
     }
 
-    fun hide() {
-        val view = overlayView ?: return
+    fun hideBlock() {
+        if (!isShowing) return
         try {
-            windowManager.removeView(view)
-        } catch (_: Exception) {
-            // view may already have been removed
+            overlayView?.let { windowManager.removeView(it) }
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
         overlayView = null
+        isShowing = false
     }
-
-    fun isShowing(): Boolean = overlayView != null
 }
