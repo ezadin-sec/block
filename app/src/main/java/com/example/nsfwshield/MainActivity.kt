@@ -9,9 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.view.LayoutInflater
-import android.widget.ArrayAdapter
 import android.widget.EditText
-import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -215,25 +213,24 @@ class MainActivity : AppCompatActivity() {
     private fun showTargetAppsDialog() {
         val current = Prefs.targetPackages(this).toMutableSet()
         val items = targetAppCandidates.map { it.first }
-        val labels = targetAppCandidates.map { it.second }
+        val labels = targetAppCandidates.map { it.second }.toTypedArray()
         val checked = items.map { it in current }.toBooleanArray()
 
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_multiple_choice, labels)
-        val dialog = AlertDialog.Builder(this)
+        AlertDialog.Builder(this)
             .setTitle(R.string.target_apps)
-            .setAdapter(adapter, null)
+            .setMultiChoiceItems(labels, checked) { _, which, isChecked ->
+                checked[which] = isChecked
+            }
             .setPositiveButton(R.string.ok) { _, _ ->
-                val lv = dialog.listView
                 val selected = mutableSetOf<String>()
-                items.forEachIndexed { i, pkg -> if (lv.isItemChecked(i)) selected.add(pkg) }
+                items.forEachIndexed { i, pkg ->
+                    if (checked[i]) selected.add(pkg)
+                }
                 Prefs.setTargetPackages(this, selected)
                 toast("تم حفظ التطبيقات المستهدفة")
             }
             .setNegativeButton(R.string.cancel, null)
-            .create()
-        dialog.show()
-        val lv = dialog.listView
-        checked.forEachIndexed { i, c -> lv.setItemChecked(i, c) }
+            .show()
     }
 
     // ---------- PIN settings ----------
@@ -257,7 +254,7 @@ class MainActivity : AppCompatActivity() {
                 when (which) {
                     0 -> showChangePinDialog()
                     1 -> {
-                        PinManager.clearPin(this)
+                        PinManager.setPin(this, CharArray(0), overwrite = true)
                         toast("تم حذف PIN")
                     }
                 }
