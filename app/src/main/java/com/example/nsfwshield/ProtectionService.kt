@@ -122,7 +122,7 @@ class ProtectionService : Service() {
                 lastInferenceMs = inferenceMs
                 lastScore = score
                 foregroundApp = AppDetector.foregroundPackage(this)
-                if (blocked) overlay.show() else overlay.hide()
+                if (blocked) overlay.showBlock() else overlay.hideBlock()
             }
         )
 
@@ -150,7 +150,7 @@ class ProtectionService : Service() {
         classifier = null
         decision?.reset()
         decision = null
-        overlay.hide()
+        overlay.hideBlock()
         Prefs.setProtectionOn(this, false)
         framesAnalyzed = 0
         lastInferenceMs = 0
