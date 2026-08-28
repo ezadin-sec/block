@@ -18,7 +18,7 @@ object AppDetector {
     fun hasUsageAccess(ctx: Context): Boolean {
         val appOps = ctx.getSystemService(Context.APP_OPS_SERVICE) as AppOpsManager
         val mode = appOps.unsafeCheckOpNoThrow(
-            AppOpsManager.OPSTR_PACKAGE_USAGE_STATS,
+            AppOpsManager.OPSTR_GET_USAGE_STATS,
             Process.myUid(),
             ctx.packageName
         )
